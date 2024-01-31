@@ -68,4 +68,3 @@ function getTasks()
     }
     return $tasks;
 }
-?>

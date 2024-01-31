@@ -1,38 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD App</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>CRUD App</h1>
-    <div id="task-form">
-        <h2>Añadir/Editar Tarea</h2>
-        <form id="task-form">
-            <label for="title">Título:</label>
-            <input type="text" id="title" name="title" required><br>
-    
-            <label for="importance">Importancia:</label>
-            <select id="importance" name="importance" required>
-                <option value="bajo">Bajo</option>
-                <option value="medio">Medio</option>
-                <option value="alto">Alto</option>
-            </select><br>
-    
-            <label for="description">Descripción:</label>
-            <textarea id="description" name="description" required></textarea><br>
-    
-            <label for="image">Imagen:</label>
-            <input type="file" id="image" name="image"><br>
-    
-            <input type="submit" value="Guardar Tarea">
-        </form>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login / Registro</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form id="login-form" action="login.php" method="POST">
+        <h2>Iniciar Sesión</h2>
+        <label for="login-email">Correo electrónico:</label>
+        <input
+          type="email"
+          id="login-email"
+          name="login-email"
+          required
+        /><br />
+
+        <label for="login-password">Contraseña:</label>
+        <input
+          type="password"
+          id="login-password"
+          name="login-password"
+          required
+        /><br />
+
+        <input type="submit" value="Iniciar Sesión" />
+
+        <p>
+          ¿Aún no tienes una cuenta?
+          <a href="#" id="toggle-form">Regístrate aquí</a>
+        </p>
+      </form>
+
+      <form
+        id="register-form"
+        action="register.php"
+        method="POST"
+        style="display: none"
+      >
+        <h2>Registro de Usuario</h2>
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required /><br />
+
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required /><br />
+
+        <input type="submit" value="Registrarse" />
+      </form>
     </div>
-    <div id="task-list">
-        <!-- Lista de tareas -->
-    </div>
-    <script src="script.js"></script>
-</body>
+
+    <script>
+      document
+        .getElementById("toggle-form")
+        .addEventListener("click", function () {
+          var loginForm = document.getElementById("login-form");
+          var registerForm = document.getElementById("register-form");
+
+          if (loginForm.style.display === "none") {
+            loginForm.style.display = "block";
+            registerForm.style.display = "none";
+          } else {
+            loginForm.style.display = "none";
+            registerForm.style.display = "block";
+          }
+        });
+    </script>
+  </body>
 </html>
