@@ -1,111 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login / Registro</title>
-    <link rel="stylesheet" href="./src/style.css">
+    <link rel="stylesheet" href="./src/style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-<div class="container">
-    <form id="login-form" action="./utils/auth.php" method="POST">
+  </head>
+  <body>
+    <div class="container">
+      <form id="login-form" action="./utils/auth.php" method="POST">
         <h2>Iniciar Sesión</h2>
         <label for="login-email">Correo electrónico:</label>
-        <input
-                type="email"
-                id="login-email"
-                name="login-email"
-                required
-        /><br />
+        <input type="email" id="login-email" name="email" required /><br />
 
         <label for="login-password">Contraseña:</label>
         <input
-                type="password"
-                id="login-password"
-                name="login-password"
-                required
+          type="password"
+          id="login-password"
+          name="password"
+          required
         /><br />
 
         <input type="submit" value="Iniciar Sesión" />
 
         <p>
-            ¿Aún no tienes una cuenta?
-            <a href="#" id="toggle-form">Regístrate aquí</a>
+          ¿Aún no tienes una cuenta?
+          <a href="#" id="toggle-form">Regístrate aquí</a>
         </p>
-    </form>
+      </form>
 
-    <form
-            id="register-form"
-            action="./utils/auth.php"
-            method="POST"
-            style="display: none"
-    >
+      <form
+        id="register-form"
+        action="./utils/auth.php"
+        method="POST"
+        style="display: none"
+      >
         <h2>Registro de Usuario</h2>
-        <label for="email">Correo electrónico:</label>
-        <input type="email" id="email" name="email" required /><br />
+        <label for="register-email">Correo electrónico:</label>
+        <input type="email" id="register-email" name="email" required /><br />
 
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" required /><br />
+        <label for="register-password">Contraseña:</label>
+        <input
+          type="password"
+          id="register-password"
+          name="password"
+          required
+        /><br />
 
         <input type="submit" value="Registrarse" />
-    </form>
-</div>
+      </form>
 
-<script>
-    $(document).ready(function() {
+      <div id="message"></div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
         // Manejar el cambio entre formularios
-        $('#toggle-form').click(function(e) {
-            e.preventDefault();
-            $('#login-form, #register-form').toggle();
+        $("#toggle-form").click(function (e) {
+          e.preventDefault();
+          $("#login-form, #register-form").toggle();
         });
 
         // Manejar el envío del formulario de registro
-        $('#register-form').submit(function(event) {
-            event.preventDefault(); // Prevenir el envío del formulario por defecto
+        $("#register-form").submit(function (event) {
+          event.preventDefault(); // Prevenir el envío del formulario por defecto
 
-            // Obtener los valores del formulario
-            var email = $('#email').val();
-            var password = $('#password').val();
+          // Obtener los valores del formulario de registro
+          var email = $("#register-email").val();
+          var password = $("#register-password").val();
 
-            // Enviar la solicitud AJAX al servidor
-            $.ajax({
-                type: 'POST',
-                url: './utils/auth.php',
-                data: {
-                    action: 'register',
-                    email: email,
-                    password: password
-                },
-                success: function(response) {
-                    alert(response); // Mostrar la respuesta del servidor
-                }
-            });
+          // Enviar la solicitud AJAX al servidor
+          $.ajax({
+            type: "POST",
+            url: "./utils/auth.php",
+            data: {
+              action: "register",
+              email: email,
+              password: password,
+            },
+            success: function (response) {
+              // Mostrar la respuesta del servidor en el elemento div
+              $("#message").text(response);
+            },
+          });
         });
 
         // Manejar el envío del formulario de inicio de sesión
-        $('#login-form').submit(function(event) {
-            event.preventDefault(); // Prevenir el envío del formulario por defecto
+        $("#login-form").submit(function (event) {
+          // Prevenir el envío del formulario por defecto
+          event.preventDefault();
 
-            // Obtener los valores del formulario
-            var email = $('#login-email').val();
-            var password = $('#login-password').val();
+          // Obtener los valores del formulario de inicio de sesión
+          var email = $("#login-email").val();
+          var password = $("#login-password").val();
 
-            // Enviar la solicitud AJAX al servidor
-            $.ajax({
-                type: 'POST',
-                url: './utils/auth.php',
-                data: {
-                    action: 'login',
-                    email: email,
-                    password: password
-                },
-                success: function(response) {
-                    alert(response); 
-                }
-            });
+          // Enviar la solicitud AJAX al servidor
+          $.ajax({
+            type: "POST",
+            url: "./utils/auth.php",
+            data: {
+              action: "login",
+              email: email,
+              password: password,
+            },
+            success: function (response) {
+              // Mostrar la respuesta del servidor en el elemento div
+              $("#message").text(response);
+            },
+          });
         });
-    });
-</script>
-</body>
+      });
+    </script>
+  </body>
 </html>

@@ -1,34 +1,41 @@
 <?php
 include 'conexion.php';
-function registerUser($email, $password)
-{
+
+function registerUser($email, $password){
     global $conn;
 
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-    $sql = "INSERT INTO usuarios (email, password) VALUES ('$email', '$hashedPassword')";
-    if ($conn->query($sql) === TRUE) {
+    $sql = "INSERT INTO usuarios (email, password) VALUES (?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $email, $password);
+    
+    if ($stmt->execute()) {
         return "Registro exitoso. Por favor, inicia sesión.";
     } else {
-        return "Error al registrar al usuario: " . $conn->error;
+        return "Error al registrar al usuario: " . $stmt->error;
     }
 }
 
-function loginUser($email, $password)
-{
+function loginUser($email, $password){
     global $conn;
 
-    $sql = "SELECT * FROM usuarios WHERE email='$email'";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM usuarios WHERE email=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows == 1) {
         $user = $result->fetch_assoc();
-        if (password_verify($password, $user['password'])) {
+        if ($password === $user['password']) {
             return true;
+        } else {
+            return false; 
         }
+    } else {
+        return false; 
     }
-    return false;
 }
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['action'])) {
         $action = $_POST['action'];
@@ -44,13 +51,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         } elseif ($action === 'login') {
             if (isset($_POST['email']) && isset($_POST['password'])) {
-                $email = $_POST['email'];
-                $password = $_POST['password'];
+                $email = trim($_POST['email']);
+                $password = trim($_POST['password']);
 
-                if (loginUser($email, $password)) {
-                    echo "Inicio de sesión exitoso.";
+                if (!empty($email) && !empty($password)) {
+                    if (loginUser($email, $password)) {
+                        echo "Inicio de sesión exitoso.";
+                    } else {
+                        echo "Credenciales incorrectas.";
+                    }
                 } else {
-                    echo "Credenciales incorrectas.";
+                    echo "Error: Todos los campos son requeridos para iniciar sesión.";
                 }
             } else {
                 echo "Error: Todos los campos son requeridos para iniciar sesión.";
@@ -64,4 +75,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo "Error: Método de solicitud no válido.";
 }
-
+?>
