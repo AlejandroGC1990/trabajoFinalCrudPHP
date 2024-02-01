@@ -1,21 +1,24 @@
 <?php
 include 'conexion.php';
 
-function registerUser($email, $password){
+function registerUser($email, $password)
+{
     global $conn;
 
     $sql = "INSERT INTO usuarios (email, password) VALUES (?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $email, $password);
-    
+
     if ($stmt->execute()) {
-        return "Registro exitoso. Por favor, inicia sesión.";
+        header("Location: ./../../page/dashboard.html");
+        exit;
     } else {
-        return "Error al registrar al usuario: " . $stmt->error;
+        echo "Error al registrar al usuario: " . $stmt->error;
     }
 }
 
-function loginUser($email, $password){
+function loginUser($email, $password)
+{
     global $conn;
 
     $sql = "SELECT * FROM usuarios WHERE email=?";
@@ -27,12 +30,13 @@ function loginUser($email, $password){
     if ($result->num_rows == 1) {
         $user = $result->fetch_assoc();
         if ($password === $user['password']) {
-            return true;
+            header("Location: ./../../page/dashboard.html");
+            exit;
         } else {
-            return false; 
+            echo "Credenciales incorrectas.";
         }
     } else {
-        return false; 
+        return false;
     }
 }
 
@@ -75,4 +79,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo "Error: Método de solicitud no válido.";
 }
-?>
