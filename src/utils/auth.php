@@ -1,5 +1,8 @@
 <?php
+
 include 'conexion.php';
+
+session_start();
 
 function registerUser($email, $password)
 {
@@ -10,8 +13,9 @@ function registerUser($email, $password)
     $stmt->bind_param("ss", $email, $password);
 
     if ($stmt->execute()) {
-        header("Location: ./../../page/dashboard.html");
-        exit;
+        $Id_usuario = $stmt->insert_id; 
+        $_SESSION['Id_usuario'] = $Id_usuario; 
+        echo "Registro exitoso";
     } else {
         echo "Error al registrar al usuario: " . $stmt->error;
     }
@@ -30,13 +34,13 @@ function loginUser($email, $password)
     if ($result->num_rows == 1) {
         $user = $result->fetch_assoc();
         if ($password === $user['password']) {
-            header("Location: ./../../page/dashboard.html");
-            exit;
+            $_SESSION['Id_usuario'] = $user['Id_usuario'];
+            echo "Inicio de sesión exitoso";
         } else {
             echo "Credenciales incorrectas.";
         }
     } else {
-        return false;
+        echo "Credenciales incorrectas.";
     }
 }
 
@@ -49,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $email = $_POST['email'];
                 $password = $_POST['password'];
 
-                echo registerUser($email, $password);
+                registerUser($email, $password);
             } else {
                 echo "Error: Todos los campos son requeridos para el registro.";
             }
@@ -59,11 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $password = trim($_POST['password']);
 
                 if (!empty($email) && !empty($password)) {
-                    if (loginUser($email, $password)) {
-                        echo "Inicio de sesión exitoso.";
-                    } else {
-                        echo "Credenciales incorrectas.";
-                    }
+                    loginUser($email, $password);
                 } else {
                     echo "Error: Todos los campos son requeridos para iniciar sesión.";
                 }

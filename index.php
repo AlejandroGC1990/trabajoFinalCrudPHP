@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="./src/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
     <div class="container">
         <form id="login-form" action="#" method="POST">
@@ -68,7 +70,7 @@
                         // Mostrar la respuesta del servidor en el elemento div
                         $("#message").text(response);
                         console.log("Registro exitoso");
-                        window.location.href = './src/page/dashboard.html';
+                        window.location.href = './src/page/dashboard.php';
                     },
                     error: function (xhr, status, error) {
                         console.error("Error en la solicitud AJAX:", error);
@@ -98,7 +100,7 @@
                         // Mostrar la respuesta del servidor en el elemento div
                         $("#message").text(response);
                         console.log("Inicio de sesión exitoso");
-                        window.location.href = './src/page/dashboard.html';
+                        window.location.href = './src/page/dashboard.php'; // Corrección de la ruta
                     },
                     error: function (xhr, status, error) {
                         console.error("Error en la solicitud AJAX:", error);
@@ -108,4 +110,5 @@
         });
     </script>
 </body>
+
 </html>
