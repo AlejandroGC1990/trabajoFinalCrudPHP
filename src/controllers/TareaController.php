@@ -24,4 +24,8 @@ class TareaController {
     public function eliminarTarea($Id_tarea, $Id_usuario) {
         $this->model->deleteTask($Id_tarea, $Id_usuario);
     }
+
+    public function actualizarTarea($Id_usuario, $Id_tarea, $titulo, $nivel_importancia, $descripcion_tarea) {
+        $this->model->updateTask($Id_usuario, $Id_tarea, $titulo, $nivel_importancia, $descripcion_tarea);
+    }
 }
