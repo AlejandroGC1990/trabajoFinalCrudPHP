@@ -12,7 +12,3 @@ $conn = new mysqli($host, $usuario, $pass, $bd);
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
-
-
-//! PASARLE LA ID_USUARIO A DASHBOARD PÀRA QUE PUEDA GUARDAR EL ID_USUARIO EN LA BD
-//! MIRAR LA LÓGICA DEL ID_TAREA, CREO QUE NO LE LLEGA

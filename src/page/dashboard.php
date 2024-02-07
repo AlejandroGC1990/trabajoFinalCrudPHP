@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 if(!isset($_SESSION['Id_usuario'])) {
@@ -9,6 +10,9 @@ if(!isset($_SESSION['Id_usuario'])) {
 $Id_usuario = $_SESSION['Id_usuario'];
 
 include '../utils/conexion.php';
+include_once '../controllers/TareaController.php';
+
+$tareaController = new TareaController($conn);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Procesar los datos del formulario
@@ -16,21 +20,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nivel_importancia = $_POST['nivel_importancia'];
     $descripcion_tarea = $_POST['descripcion_tarea'];
 
-    // Prevenir inyección de SQL usando consultas preparadas
-    $stmt = $conn->prepare("INSERT INTO tareas (Id_usuario, titulo, nivel_importancia, descripcion_tarea) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("isss", $Id_usuario, $titulo, $nivel_importancia, $descripcion_tarea);
-
-    if ($stmt->execute()) {
-        // Tarea agregada exitosamente
-        header("Location: dashboard.php");
-        exit();
-    } else {
-        echo "Error al agregar la tarea: " . $conn->error;
-    }
-
-    $stmt->close();
-    $conn->close();
+    $tareaController->agregarTarea(
+        $Id_usuario, 
+        $titulo, 
+        $nivel_importancia, 
+        $descripcion_tarea
+    );
 }
+
+$tareas = $tareaController->obtenerTareas($Id_usuario);
 ?>
 
 <!DOCTYPE html>
@@ -64,6 +62,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 
-    <?php include './../components/tareas.php' ?>
+    <div id="tasks">
+        <!-- Incluir el archivo tareas.php para mostrar las tareas -->
+        <?php include './../view/components/tareas.php'; ?>
+    </div>
 </body>
 </html>

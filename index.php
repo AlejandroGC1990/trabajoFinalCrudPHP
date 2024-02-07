@@ -71,7 +71,9 @@
                         $("#message").text(response);
                         console.log("Registro exitoso");
                         window.location.href = './src/page/dashboard.php';
+                        // window.location.href = './src/views/page/dashboard.php';
                     },
+                    
                     error: function (xhr, status, error) {
                         console.error("Error en la solicitud AJAX:", error);
                     }
@@ -101,6 +103,7 @@
                         $("#message").text(response);
                         console.log("Inicio de sesión exitoso");
                         window.location.href = './src/page/dashboard.php'; // Corrección de la ruta
+                        // window.location.href = './src/views/page/dashboard.php';
                     },
                     error: function (xhr, status, error) {
                         console.error("Error en la solicitud AJAX:", error);
