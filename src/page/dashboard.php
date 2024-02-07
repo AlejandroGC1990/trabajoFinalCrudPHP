@@ -12,21 +12,21 @@ $Id_usuario = $_SESSION['Id_usuario'];
 include '../utils/conexion.php';
 include_once '../controllers/TareaController.php';
 
-$tareaController = new TareaController($conn);
+$tareaController = new TareaController();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Procesar los datos del formulario
-    $titulo = $_POST['titulo'];
-    $nivel_importancia = $_POST['nivel_importancia'];
-    $descripcion_tarea = $_POST['descripcion_tarea'];
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     // Procesar los datos del formulario
+//     $titulo = $_POST['titulo'];
+//     $nivel_importancia = $_POST['nivel_importancia'];
+//     $descripcion_tarea = $_POST['descripcion_tarea'];
 
-    $tareaController->agregarTarea(
-        $Id_usuario, 
-        $titulo, 
-        $nivel_importancia, 
-        $descripcion_tarea
-    );
-}
+//     $tareaController->agregarTarea(
+//         $Id_usuario, 
+//         $titulo, 
+//         $nivel_importancia, 
+//         $descripcion_tarea
+//     );
+// }
 
 $tareas = $tareaController->obtenerTareas($Id_usuario);
 ?>
@@ -64,7 +64,7 @@ $tareas = $tareaController->obtenerTareas($Id_usuario);
 
     <div id="tasks">
         <!-- Incluir el archivo tareas.php para mostrar las tareas -->
-        <?php include './../view/components/tareas.php'; ?>
+        <?php include_once '../views/components/tareas.php'; ?>
     </div>
 </body>
 </html>

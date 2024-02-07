@@ -1,7 +1,7 @@
 <?php
 
 include_once '../models/crud.php';
-// include_once '../utils/conexion.php';
+include_once '../utils/conexion.php';
 
 class TareaController {
     private $model;
@@ -14,7 +14,7 @@ class TareaController {
     }
 
     public function obtenerTareas($Id_usuario) {
-        return $this->model->getTasksByUser($Id_usuario); // Llamada al nuevo método del modelo
+        return $this->model->getTasksByUser($Id_usuario); 
     }
 
     public function agregarTarea($Id_usuario, $titulo, $nivel_importancia, $descripcion_tarea) {
@@ -22,10 +22,6 @@ class TareaController {
     }
 
     public function eliminarTarea($Id_tarea, $Id_usuario) {
-        $this->model->deleteTask($Id_tarea, $Id_usuario);
-    }
-
-    public function actualizarTarea($Id_usuario, $Id_tarea, $titulo, $nivel_importancia, $descripcion_tarea) {
-        $this->model->updateTask($Id_usuario, $Id_tarea, $titulo, $nivel_importancia, $descripcion_tarea);
+        return $this->model->deleteTask($Id_usuario, $Id_tarea);
     }
 }

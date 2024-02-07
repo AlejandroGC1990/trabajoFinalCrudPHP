@@ -1,20 +1,25 @@
 <?php
 
-include_once '../../controllers/TareaController.php';
-// include_once '../controllers/TareaController.php';
+include_once '../controllers/TareaController.php';
 
-// global $conn;
 $tareaController = new TareaController();
-
-
-
-// $sql = "SELECT * FROM tareas";
-// $resultado = $conn->query($sql);
-
 $Id_usuario = $_SESSION['Id_usuario'];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["action"] == "delete") {
+    // Verificar si se han enviado los datos necesarios
+    if(isset($_POST['Id_tarea']) && !empty($_POST['Id_tarea'])) {
+        // Obtener el Id_tarea desde el formulario
+        $Id_tarea = $_POST['Id_tarea'];
+        // Eliminar la tarea
+        $tareaController->eliminarTarea($Id_tarea, $Id_usuario);
+        // Recargar la página para reflejar los cambios
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
+    }
+}
+
 $tareas = $tareaController->obtenerTareas($Id_usuario);
 
-// if ($resultado && $resultado->num_rows > 0) {
 if ($tareas) {
 
     ?>
@@ -41,13 +46,13 @@ if ($tareas) {
                 <td><?php echo $tarea['descripcion_tarea']; ?></td>
                 
                 <td>
-                    <form action="../controllers/TareaController.php" method="POST" style="display: inline;">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" style="display: inline;">
                         <input type="hidden" name="Id_usuario" value="<?php echo $Id_usuario; ?>">
                         <input type="hidden" name="Id_tarea" value="<?php echo $tarea['Id_tarea']; ?>">
                         <input type="hidden" name="action" value="update">
                         <button type="submit">Actualizar</button>
                     </form>
-                    <form action="../controllers/TareaController.php" method="POST" style="display: inline;">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" style="display: inline;">
                         <input type="hidden" name="Id_usuario" value="<?php echo $Id_usuario; ?>">
                         <input type="hidden" name="Id_tarea" value="<?php echo $tarea['Id_tarea']; ?>">
                         <input type="hidden" name="action" value="delete">

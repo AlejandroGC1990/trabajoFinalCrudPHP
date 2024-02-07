@@ -45,16 +45,31 @@ class Crud{
 
     function deleteTask($Id_usuario, $Id_tarea){
 
-        $sql = "DELETE FROM tareas WHERE id='$Id_tarea' AND id_usuario='$Id_usuario'";
+        $sql = "DELETE FROM tareas WHERE Id_tarea=? AND Id_usuario=?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("ii", $Id_tarea, $Id_usuario);
 
-        if ($this->conn->query($sql) === TRUE) {
+        if ($stmt->execute()) {
             // Enviar mensaje de éxito
             return true;
         } else {
             // Manejar el error de la consulta SQL
             echo "Error al eliminar la tarea: " . $this->conn->error;
+            return false;
+        }
+    }
+
+    function updateTask($Id_usuario, $Id_tarea, $titulo, $nivel_importancia, $descripcion_tarea){
+        $sql = "UPDATE tareas SET titulo = ?, nivel_importancia = ?, descripcion_tarea = ? WHERE Id_tarea = ? AND Id_usuario = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("sssss", $titulo, $nivel_importancia, $descripcion_tarea, $Id_tarea, $Id_usuario);
+
+        if ($stmt->execute()) {
+            // Enviar mensaje de éxito
+            return true;
+        } else {
+            // Manejar el error de la consulta SQL
+            echo "Error al actualizar la tarea: " . $this->conn->error;
             return false;
         }
     }
