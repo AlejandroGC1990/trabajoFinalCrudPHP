@@ -1,6 +1,6 @@
 <?php
 
-include '../../utils/conexion.php';
+include './../utils/conexion.php';
 
 class Crud{
     private $conn;
@@ -23,14 +23,14 @@ class Crud{
     
     function addTask($Id_usuario, $titulo, $nivel_importancia, $descripcion_tarea){
 
-        // // Sanitizar y escapar los datos para prevenir inyección SQL
+        // Sanitizar y escapar los datos para prevenir inyección SQL
         $titulo = mysqli_real_escape_string($this->conn, $titulo);
         $nivel_importancia = mysqli_real_escape_string($this->conn, $nivel_importancia);
         $descripcion_tarea = mysqli_real_escape_string($this->conn, $descripcion_tarea);
 
         $sql = "INSERT INTO tareas (Id_usuario, titulo, nivel_importancia, descripcion_tarea) VALUES (?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("isss", $Id_usuario, $titulo, $nivel_importancia, $descripcion_tarea);
+        $stmt->bind_param("ssss", $Id_usuario, $titulo, $nivel_importancia, $descripcion_tarea);
 
         if ($stmt->execute()) {
             // Enviar mensaje de éxito
@@ -43,7 +43,7 @@ class Crud{
     }
 
 
-    function deleteTask($Id_tarea, $Id_usuario){
+    function deleteTask($Id_usuario, $Id_tarea){
 
         $sql = "DELETE FROM tareas WHERE Id_tarea=? AND Id_usuario=?";
         $stmt = $this->conn->prepare($sql);
