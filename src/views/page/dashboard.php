@@ -76,6 +76,21 @@ $tareas = $tareaController->obtenerTareas($Id_usuario);
     <div id="tasks">
         <?php include_once '../components/tareas.php'; ?>
     </div>
+    <script>
+    // Recargar la página después de enviar el formulario de agregar, actualizar o eliminar tarea
+    $(document).ready(function() {
+        $('#task-form form, #tabla-tareas form').submit(function(e) {
+            e.preventDefault(); // Evitar que el formulario se envíe normalmente
+            var form = $(this);
+            $.post(form.attr('action'), form.serialize(), function(data) {
+                // Manejar la respuesta del servidor si es necesario
+
+                // Recargar la página
+                location.reload();
+            });
+        });
+    });
+</script>
 
 </body>
 

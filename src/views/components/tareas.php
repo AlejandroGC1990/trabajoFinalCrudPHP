@@ -36,9 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Error al actualizar la tarea.";
         }
     } 
-} else {
-    echo "Acceso denegado.";
-}
+} 
 
 // Manejar la acción de eliminar tarea
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["action"] == "delete") {
@@ -73,7 +71,7 @@ if ($tareas) {
         <?php foreach ($tareas as $index => $tarea): ?>
             <form action="dashboard.php" method="POST">
                 <tr data-id="<?php echo $tarea['Id_tarea']; ?>">
-                    <td><input type="text" name="titulo" value=<?php echo $tarea['titulo']; ?>></td>
+                    <td><input type="text" name="titulo" value="<?php echo $tarea['titulo']; ?>"></td>
                     <td>
                         <!-- <?php echo $tarea['nivel_importancia']; ?> -->
                         <select id="nivel_importancia" name="nivel_importancia" required>
@@ -87,7 +85,7 @@ if ($tareas) {
                         </select><br>
                     </td>
                     <td>
-                        <input type="text" name="descripcion" value=<?php echo $tarea['descripcion_tarea']; ?>>
+                        <input type="text" name="descripcion" value="<?php echo $tarea['descripcion_tarea']; ?>">
                     </td>
 
                     <td>
