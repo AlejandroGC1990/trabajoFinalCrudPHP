@@ -3,16 +3,13 @@
 session_start();
 
 if (!isset($_SESSION['Id_usuario'])) {
-    // header("Location: ./../../../index.php");
     header("Location: ./../../../../index.php");
     exit();
 }
 
 $Id_usuario = $_SESSION['Id_usuario'];
 
-// include './../utils/conexion.php';
-include '../../utils/conexion.php';
-// include_once '../controllers/TareaController.php';
+include './../../../private/conexion.php';
 include_once '../../controllers/TareaController.php';
 
 $tareaController = new TareaController();
@@ -48,7 +45,7 @@ $tareas = $tareaController->obtenerTareas($Id_usuario);
     <title>CRUD App</title>
     <link rel="stylesheet" href="../../styles/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="script.js"></script>
+    <script src="../../utils/script.js"></script>
 </head>
 
 <body>
@@ -76,22 +73,8 @@ $tareas = $tareaController->obtenerTareas($Id_usuario);
     <div id="tasks">
         <?php include_once '../components/tareas.php'; ?>
     </div>
-    <script>
-    // Recargar la página después de enviar el formulario de agregar, actualizar o eliminar tarea
-    $(document).ready(function() {
-        $('#task-form form, #tabla-tareas form').submit(function(e) {
-            e.preventDefault(); // Evitar que el formulario se envíe normalmente
-            var form = $(this);
-            $.post(form.attr('action'), form.serialize(), function(data) {
-                // Manejar la respuesta del servidor si es necesario
 
-                // Recargar la página
-                location.reload();
-            });
-        });
-    });
-</script>
-
+    <script> recargarPagina(); </script>
 </body>
 
 </html>

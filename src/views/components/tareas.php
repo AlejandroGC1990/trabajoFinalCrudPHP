@@ -1,12 +1,5 @@
 <?php
 
-//!___________________________________________________________________________
-// 1.QUE LA PÁGINA SE REINICIE AL GUARDAR TAREA, ELIMINAR Y ACTUALIZAR, SE GUARDAN LOS CAMBIOS, PERO 
-//NO SE REFLEJAN LOS CAMBIOS HASTA QUE REINICIO LA PÁGINA
-// 2. SOLO ME GUARDA 1 PALABRA EN EL TÍTULO Y DESCRIPCIÓN, NO ME GUARDA UNA FRASE ENTERA
-//!____________________________________________________________________________
-
-
 include_once '../../controllers/TareaController.php';
 
 $tareaController = new TareaController();
@@ -48,8 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
         $tareaController->eliminarTarea($Id_tarea, $Id_usuario);
         // Recargar la lista de tareas después de eliminar una tarea
         $tareas = $tareaController->obtenerTareas($Id_usuario);
-        // header("Location: " . $_SERVER['PHP_SELF']);
-        // exit();
     }
 }
 
@@ -113,4 +104,3 @@ if ($tareas) {
     // Si no hay tareas disponibles, mostrar un mensaje indicando que no hay tareas almacenadas
     echo "No hay tareas almacenadas.";
 }
-

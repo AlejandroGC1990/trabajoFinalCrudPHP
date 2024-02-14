@@ -1,6 +1,6 @@
 <?php
 
-include '../../utils/conexion.php';
+include './../../../private/conexion.php';
 
 class Crud{
     private $conn;
@@ -23,7 +23,7 @@ class Crud{
     
     function addTask($Id_usuario, $titulo, $nivel_importancia, $descripcion_tarea){
 
-        // // Sanitizar y escapar los datos para prevenir inyección SQL
+        // Sanitizar y escapar los datos para prevenir inyección SQL
         $titulo = mysqli_real_escape_string($this->conn, $titulo);
         $nivel_importancia = mysqli_real_escape_string($this->conn, $nivel_importancia);
         $descripcion_tarea = mysqli_real_escape_string($this->conn, $descripcion_tarea);
@@ -41,7 +41,6 @@ class Crud{
             return false;
         }
     }
-
 
     function deleteTask($Id_tarea, $Id_usuario){
 
