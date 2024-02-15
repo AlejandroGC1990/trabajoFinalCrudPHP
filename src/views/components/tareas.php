@@ -50,6 +50,23 @@ if (!isset($tareas)) {
 }
 
 if ($tareas) {
+    echo '<div class="task-container">';
+    foreach ($tareas as $tarea) {
+        // Determinar la clase CSS según el nivel de importancia
+        $importancia_class = strtolower($tarea['nivel_importancia']);
+        // Imprimir cada tarea como un "posit" con el color de fondo correspondiente
+        echo '<div class="task ' . $importancia_class . '">';
+        echo '<div class="task-content">';
+        echo '<h3>' . $tarea['titulo'] . '</h3>';
+        echo '<p>' . $tarea['descripcion_tarea'] . '</p>';
+        echo '</div>';
+        echo '<div class="task-buttons">';
+        echo '<button class="update">Actualizar</button>';
+        echo '<button class="delete">Eliminar</button>';
+        echo '</div>';
+        echo '</div>';
+    }
+    //TABLA ANTIGUA
     ?>
     <h2>Listado de tareas</h2>
     <table id="tabla-tareas" border='1'>
@@ -100,7 +117,8 @@ if ($tareas) {
         <?php endforeach; ?>
     </table>
     <?php
-} else {
-    // Si no hay tareas disponibles, mostrar un mensaje indicando que no hay tareas almacenadas
-    echo "No hay tareas almacenadas.";
-}
+} 
+// else {
+//     // Si no hay tareas disponibles, mostrar un mensaje indicando que no hay tareas almacenadas
+//     echo "No hay tareas almacenadas.";
+// }

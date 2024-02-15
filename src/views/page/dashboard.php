@@ -43,34 +43,35 @@ $tareas = $tareaController->obtenerTareas($Id_usuario);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD App</title>
-    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/dashboard.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../../utils/script.js"></script>
 </head>
 
 <body>
-    <h1>CRUD App</h1>
-    <div id="task-form">
-        <h2>Añadir Tarea</h2>
-        <form action="dashboard.php" method="POST">
-            <label for="titulo">Título:</label>
-            <input type="text" id="titulo" name="titulo" pattern="[a-zA-Z0-9\s]+"
-                title="Por favor, ingrese un título válido (solo letras, números y espacios)" required><br>
-            <label for="nivel_importancia">Importancia:</label>
-            <select id="nivel_importancia" name="nivel_importancia" required>
-                <option value="bajo">Bajo</option>
-                <option value="medio">Medio</option>
-                <option value="alto">Alto</option>
-            </select><br>
+    <div class="menu-container">
+        <div class="create-form-container" id="task-form">
+            <h2>Añadir Tarea</h2>
+            <form action="dashboard.php" method="POST">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" pattern="[a-zA-Z0-9\s]+"
+                    title="Por favor, ingrese un título válido (solo letras, números y espacios)" required><br>
+                <label for="nivel_importancia">Importancia:</label>
+                <select id="nivel_importancia" name="nivel_importancia" required>
+                    <option value="bajo">Bajo</option>
+                    <option value="medio">Medio</option>
+                    <option value="alto">Alto</option>
+                </select><br>
 
-            <label for="descripcion_tarea">Descripción:</label>
-            <textarea id="descripcion_tarea" name="descripcion_tarea" required></textarea><br>
+                <label for="descripcion_tarea">Descripción:</label>
+                <textarea id="descripcion_tarea" name="descripcion_tarea" required></textarea><br>
 
-            <input type="submit" value="Guardar Tarea">
-        </form>
+                <input type="submit" value="Guardar Tarea">
+            </form>
+        </div>
     </div>
 
-    <div id="tasks">
+    <div class="task-table" id="tasks">
         <?php include_once '../components/tareas.php'; ?>
     </div>
 
