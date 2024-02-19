@@ -19,18 +19,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $titulo = $_POST['titulo'];
         $nivel_importancia = $_POST['nivel_importancia'];
         $descripcion = $_POST['descripcion'];
-
         // Llamar al método de actualización en el controlador
         $resultado = $tareaController->actualizarTarea($Id_usuario, $Id_tarea, $titulo, $nivel_importancia, $descripcion);
-
+        // Recargar la lista de tareas después de eliminar una tarea
+        $tareas = $tareaController->obtenerTareas($Id_usuario);
         if ($resultado) {
             echo "Tarea actualizada correctamente.";
         } else {
             echo "Error al actualizar la tarea.";
         }
-    } 
-} 
-
+    }
+}
 // Manejar la acción de eliminar tarea
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["action"] == "delete") {
     // Verificar si se han enviado los datos necesarios
@@ -43,82 +42,67 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
         $tareas = $tareaController->obtenerTareas($Id_usuario);
     }
 }
-
 // Obtener la lista de tareas después de eliminar una tarea, si no se eliminó ninguna, obtener la lista normal
 if (!isset($tareas)) {
     $tareas = $tareaController->obtenerTareas($Id_usuario);
 }
+?>
 
-if ($tareas) {
-    echo '<div class="task-container">';
-    foreach ($tareas as $tarea) {
-        // Determinar la clase CSS según el nivel de importancia
-        $importancia_class = strtolower($tarea['nivel_importancia']);
-        // Imprimir cada tarea como un "posit" con el color de fondo correspondiente
-        echo '<div class="task ' . $importancia_class . '">';
-        echo '<div class="task-content">';
-        echo '<h3>' . $tarea['titulo'] . '</h3>';
-        echo '<p>' . $tarea['descripcion_tarea'] . '</p>';
-        echo '</div>';
-        echo '<div class="task-buttons">';
-        echo '<button class="update">Actualizar</button>';
-        echo '<button class="delete">Eliminar</button>';
-        echo '</div>';
-        echo '</div>';
-    }
-    //TABLA ANTIGUA
-    ?>
-    <h2>Listado de tareas</h2>
-    <table id="tabla-tareas" border='1'>
-        <tr>
-            <th>Título</th>
-            <th>Nivel de importancia</th>
-            <th>Descripción</th>
-            <th>Acciones</th>
-        </tr>
-        <?php foreach ($tareas as $index => $tarea): ?>
-            <form action="dashboard.php" method="POST">
-                <tr data-id="<?php echo $tarea['Id_tarea']; ?>">
-                    <td><input type="text" name="titulo" value="<?php echo $tarea['titulo']; ?>"></td>
-                    <td>
-                        <!-- <?php echo $tarea['nivel_importancia']; ?> -->
-                        <select id="nivel_importancia" name="nivel_importancia" required>
+<!DOCTYPE html>
+<html lang="en">
 
-                            <option value="<?php echo $tarea['nivel_importancia']; ?>">
-                                <?php echo $tarea['nivel_importancia']; ?>
-                            </option>
-                            <option value="bajo">Bajo</option>
-                            <option value="medio">Medio</option>
-                            <option value="alto">Alto</option>
-                        </select><br>
-                    </td>
-                    <td>
-                        <input type="text" name="descripcion" value="<?php echo $tarea['descripcion_tarea']; ?>">
-                    </td>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD App</title>
+    <link rel="stylesheet" href="../../styles/dashboard.css">
+</head>
 
-                    <td>
-                        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" style="display: inline;">
+<body>
+    <h1>Lista de Tareas</h1>
+    <div class="task-container">
+        <?php if ($tareas): ?>
+            <?php foreach ($tareas as $tarea): ?>
+                <div class="task <?php echo strtolower($tarea['nivel_importancia']); ?>">
+                    <form action="dashboard.php" method="POST">
+                        
+                            <h3><input type="text" name="titulo" value="<?php echo $tarea['titulo']; ?>"></h3>
+                            <select id="nivel_importancia" name="nivel_importancia" required>
+                                <option value="<?php echo $tarea['nivel_importancia']; ?>">
+                                    <?php echo $tarea['nivel_importancia']; ?>
+                                </option>
+                                <option value="bajo">Bajo</option>
+                                <option value="medio">Medio</option>
+                                <option value="alto">Alto</option>
+                            </select><br>
+                            <!-- <input type="text" name="descripcion" class="description" value="<?php echo $tarea['descripcion_tarea']; ?>"> -->
+                            <textarea name="descripcion" class="description"><?php echo $tarea['descripcion_tarea']; ?></textarea>
+
+                        <div class="task-buttons">
                             <input type="hidden" name="Id_usuario" value="<?php echo $Id_usuario; ?>">
                             <input type="hidden" name="Id_tarea" value="<?php echo $tarea['Id_tarea']; ?>">
                             <input type="hidden" name="action" value="update">
-                            <button type="submit">Actualizar</button>
-                        </form>
-                        <?php if ($tareas): ?>
-                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" style="display: inline;">
+                            <button class="buttonUpdate" type="submit" name="update">Actualizar</button>
+                        </div>
+                    </form>
+                    <div class="task-buttons">
+                        <form action="dashboard.php" method="POST">
+                            <?php if ($tareas): ?>
                                 <input type="hidden" name="Id_usuario" value="<?php echo $Id_usuario; ?>">
                                 <input type="hidden" name="Id_tarea" value="<?php echo $tarea['Id_tarea']; ?>">
                                 <input type="hidden" name="action" value="delete">
-                                <button type="submit">Eliminar</button>
-                            </form>
-                        <?php endif; ?>
-                    </td>
-                </tr>
-            </form>
-        <?php endforeach; ?>
-    </table>
-    <?php
-} 
-// else {
-//     // Si no hay tareas disponibles, mostrar un mensaje indicando que no hay tareas almacenadas
-//     echo "No hay tareas almacenadas.";
-// }
+                                <button type="submit" class="delete">Eliminar</button>
+                            <?php endif; ?>
+                        </form>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php else: ?>
+        <!-- Si no hay tareas disponibles, mostrar un mensaje indicando que no hay tareas almacenadas -->
+        <p>No hay tareas almacenadas.</p>
+    <?php endif; ?>
+    </div>
+</body>
+
+</html>

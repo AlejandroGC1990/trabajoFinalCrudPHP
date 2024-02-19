@@ -8,6 +8,13 @@ body {
   flex-direction: row;
 }
 
+.main-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
 .menu-container {
   flex: 1;
   height: 100vh;
@@ -17,30 +24,30 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: fixed;
+  border-radius: 10px; /* Agrega bordes redondeados */
+  overflow-y: auto; /* Agrega desplazamiento vertical si el contenido es demasiado largo */
 }
 
 .create-form-container {
-  width: 100%;
+  width: 90%;
+  height: 100%; /* Ocupa todo el alto del contenedor */
   display: flex;
-  margin: auto;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: aqua;
-}
-
-h1 {
-  margin-bottom: 30px;
-  color: #333;
+  background-color: #ece9e9;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px; /* Agrega bordes redondeados */
 }
 
 .create-form-container input[type="text"],
 .create-form-container select,
 .create-form-container textarea {
-  width: 100%; 
+  width: 100%;
   padding: 8px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
@@ -49,7 +56,6 @@ form label {
   display: block;
   margin: 10px 0;
 }
-
 
 form input[type="submit"] {
   width: 100%;
@@ -62,58 +68,105 @@ form input[type="submit"] {
   margin: auto;
 }
 
-form input[type="submit"]:hover {
-  background-color: #8d6406;
+.task input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: transparent;
+  outline: none;
 }
 
-.task-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+.task-table {
+  width: 100%;
+  padding: 10px;
+  margin-left: 15%; /* Ajusta el margen izquierdo para evitar la superposición del formulario */
+  overflow-y: auto; /* Permite desplazamiento vertical cuando el contenido excede el espacio */
 }
 
 .task {
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 10%;
-    flex-grow: 1; /* El posit ocupará todo el espacio disponible */
-    background-color: #f0f0f0; /* Color predeterminado */
+  padding: 15px;
+  border-radius: 8px;
+  flex-grow: 1;
+  margin: 10px;
 }
 
-.task.low {
-    background-color: #ffffcc; /* Amarillo para nivel bajo */
+.task h3 input[type="text"] {
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+  outline: none;
 }
 
-.task.medium {
-    background-color: #ffb366; /* Naranja para nivel medio */
-}
-
-.task.high {
-    background-color: #ff6666; /* Rojo para nivel alto */
-}
-
-.task-content {
-    margin-bottom: 10px;
+.task textarea.description {
+  width: 100%; /* Usa el 100% del ancho de la tarjeta */
+  height: 100px; /* Establece una altura predeterminada */
+  padding: 8px;
+  margin-bottom: 15px; /* Agrega un borde para delimitar el textarea */
+  border-radius: 4px;
+  border: none;
+  box-sizing: border-box;
+  background-color: transparent;
+  outline: none;
+  resize: vertical; /* Permite redimensionar verticalmente el textarea si el texto es largo */
 }
 
 .task-buttons {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Centra verticalmente los elementos */
 }
 
 .task-buttons button {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.task-buttons button.update {
-    background-color: #007bff; /* Azul para botón de actualizar */
-    color: #fff;
+.buttonUpdate {
+  background-color: #007bff;
+  color: #fff;
 }
 
 .task-buttons button.delete {
-    background-color: #dc3545; /* Rojo para botón de eliminar */
-    color: #fff;
+  background-color: #dc3545;
+  color: #fff;
+}
+
+/* Media Queries */
+
+@media only screen and (min-width: 768px) {
+  .task-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .task {
+    width: 25%;
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .task {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+/* Estilos específicos para niveles de importancia */
+.task.bajo {
+  background-color: #ffffcc; /* Amarillo para nivel bajo */
+}
+
+.task.medio {
+  background-color: #ffb366; /* Naranja para nivel medio */
+}
+
+.task.alto {
+  background-color: #ff6666; /* Rojo para nivel alto */
 }
