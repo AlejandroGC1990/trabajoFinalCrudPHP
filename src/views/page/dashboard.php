@@ -9,7 +9,8 @@ if (!isset($_SESSION['Id_usuario'])) {
 
 $Id_usuario = $_SESSION['Id_usuario'];
 
-include './../../../private/conexion.php';
+// include './../../../private/conexion.php';
+include  './../../utils/conexion.php';
 include_once '../../controllers/TareaController.php';
 
 $tareaController = new TareaController();
