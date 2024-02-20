@@ -53,7 +53,7 @@ $tareas = $tareaController->obtenerTareas($Id_usuario);
     <div class="main-container">
         <div class="menu-container">
             <div class="create-form-container" id="task-form">
-                <h2>Añadir Tarea</h2>
+                <h3>Añadir tarea</h3>
                 <form action="dashboard.php" method="POST">
                     <label for="titulo">Título:</label>
                     <input type="text" id="titulo" name="titulo" pattern="[a-zA-Z0-9\s]+"

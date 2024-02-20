@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
+  margin: 10px;
   padding: 0;
   width: 100%;
   height: 100%;
@@ -12,34 +12,36 @@ body {
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
 .menu-container {
+  /* flex: 0 0 auto; */
   flex: 1;
-  height: 100vh;
-  max-width: 15%;
-  padding: 20px;
+  height: 96%;
+  max-width: 12%;
+  padding: 10px;
+  margin-right: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: fixed;
-  border-radius: 10px; /* Agrega bordes redondeados */
-  overflow-y: auto; /* Agrega desplazamiento vertical si el contenido es demasiado largo */
+  border-radius: 10px; 
+  background-color: #ccc;
+  /*overflow-y: auto; /* Agrega desplazamiento vertical si el contenido es demasiado largo */
 }
 
 .create-form-container {
-  width: 90%;
-  height: 100%; /* Ocupa todo el alto del contenedor */
+  width: 100%;
+  height: 90%; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #ece9e9;
   padding: 20px;
   margin: 10px;
-  border-radius: 10px; /* Agrega bordes redondeados */
+  border-radius: 10px; 
 }
 
 .create-form-container input[type="text"],
@@ -80,10 +82,17 @@ form input[type="submit"] {
 }
 
 .task-table {
-  width: 100%;
-  padding: 10px;
-  margin-left: 15%; /* Ajusta el margen izquierdo para evitar la superposición del formulario */
+  flex-grow: 1;
+  /* flex: 1; */
+  width: 80%;
   overflow-y: auto; /* Permite desplazamiento vertical cuando el contenido excede el espacio */
+}
+
+.task-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-left: 15%;
 }
 
 .task {
@@ -102,7 +111,7 @@ form input[type="submit"] {
 
 .task textarea.description {
   width: 100%; /* Usa el 100% del ancho de la tarjeta */
-  height: 100px; /* Establece una altura predeterminada */
+  height: 100px; 
   padding: 8px;
   margin-bottom: 15px; /* Agrega un borde para delimitar el textarea */
   border-radius: 4px;

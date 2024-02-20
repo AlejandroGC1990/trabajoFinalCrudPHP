@@ -1,7 +1,7 @@
 <?php
 
-include './conexion.php';
-//  include './../../private/conexion.php';
+// include './conexion.php';
+include './../../private/conexion.php';
 
 session_start();
 

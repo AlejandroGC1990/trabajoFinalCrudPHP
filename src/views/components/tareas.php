@@ -59,24 +59,23 @@ if (!isset($tareas)) {
 </head>
 
 <body>
-    <h1>Lista de Tareas</h1>
     <div class="task-container">
         <?php if ($tareas): ?>
             <?php foreach ($tareas as $tarea): ?>
                 <div class="task <?php echo strtolower($tarea['nivel_importancia']); ?>">
                     <form action="dashboard.php" method="POST">
-                        
-                            <h3><input type="text" name="titulo" value="<?php echo $tarea['titulo']; ?>"></h3>
-                            <select id="nivel_importancia" name="nivel_importancia" required>
-                                <option value="<?php echo $tarea['nivel_importancia']; ?>">
-                                    <?php echo $tarea['nivel_importancia']; ?>
-                                </option>
-                                <option value="bajo">Bajo</option>
-                                <option value="medio">Medio</option>
-                                <option value="alto">Alto</option>
-                            </select><br>
-                            <!-- <input type="text" name="descripcion" class="description" value="<?php echo $tarea['descripcion_tarea']; ?>"> -->
-                            <textarea name="descripcion" class="description"><?php echo $tarea['descripcion_tarea']; ?></textarea>
+
+                        <h3><input type="text" name="titulo" value="<?php echo $tarea['titulo']; ?>"></h3>
+                        <select id="nivel_importancia" name="nivel_importancia" required>
+                            <option value="<?php echo $tarea['nivel_importancia']; ?>">
+                                <?php echo $tarea['nivel_importancia']; ?>
+                            </option>
+                            <option value="bajo">Bajo</option>
+                            <option value="medio">Medio</option>
+                            <option value="alto">Alto</option>
+                        </select><br>
+                        <!-- <input type="text" name="descripcion" class="description" value="<?php echo $tarea['descripcion_tarea']; ?>"> -->
+                        <textarea name="descripcion" class="description"><?php echo $tarea['descripcion_tarea']; ?></textarea>
 
                         <div class="task-buttons">
                             <input type="hidden" name="Id_usuario" value="<?php echo $Id_usuario; ?>">
