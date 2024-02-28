@@ -81,7 +81,10 @@ if (!isset($tareas)) {
                             <input type="hidden" name="Id_usuario" value="<?php echo $Id_usuario; ?>">
                             <input type="hidden" name="Id_tarea" value="<?php echo $tarea['Id_tarea']; ?>">
                             <input type="hidden" name="action" value="update">
-                            <button class="buttonUpdate" type="submit" name="update">Actualizar</button>
+                            <!-- <button class="buttonUpdate" type="submit" name="update">Actualizar</button> -->
+                            <button class="buttonUpdate" type="submit" name="update">
+                                <img src="../../styles/img/update.png" alta="image posits">
+                            </button>
                         </div>
                     </form>
                     <div class="task-buttons">

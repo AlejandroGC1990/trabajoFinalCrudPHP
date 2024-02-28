@@ -34,30 +34,10 @@ CONTENIDOS Y RECURSOS QUE SE INCLUIRÁN
 Los contenidos incluirán:
 -	Páginas de inicio, formulario de creación de tarea, formulario de edición de tarea, página de lista de tareas pendientes.
 -	Mensajes de retroalimentación para confirmar acciones como añadir, editar o eliminar tareas.
-Recursos:
+Recursos pendientes:
 -	Imágenes ilustrativas (si es necesario) para mejorar la experiencia del usuario.
 -	Iconos para representar acciones y estados dentro de la aplicación.
 
 TIEMPO QUE DURARÁ EL DESARROLLO
 El tiempo de desarrollo dependerá de la complejidad de las características requeridas, la disponibilidad de recursos y la planificación del proyecto. Se estima que el desarrollo completo de la aplicación web CRUD podría llevar un máximo de 4 semanas, pero esta estimación puede variar según los factores mencionados anteriormente.
 
-PLANIFICACIÓN DEL PROYECTO
-29/01/2024:
-  -	Realizar briefing.
-30/01/2024 - 31/01/2024:
-  -	Realizar la base de datos.
-01/01/2024:
-  -	Maquetar un front sencillo, para la futura conexión con la base de datos, que incluirá:
-    *	Botón crear form.
-    *	Form de creación de tarea.
-    *	Form de edición de tarea (será igual que el de creación, pero cambiando algunos matices).
-    *	Marco contenedor de cada tarea (POSIT).
-    *	Botonera del POSIT para editar o eliminar la tarea.
-02/02/2024:
-  -	Conectar la base de datos con la app.
-03/02/2024 en adelante.
-  -	Realizar el front final:
-    *	Maquetación de la página.
-      +	Posicionamiento de los elementos.
-    *	Maquetación de los primeros elementos creados y de los mensajes emergentes.
-    *	¿Añadir botón de tarea completada?

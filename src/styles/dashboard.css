@@ -27,21 +27,21 @@ body {
   align-items: center;
   justify-content: center;
   position: fixed;
-  border-radius: 10px; 
-  background-color: #ccc;
+  border-radius: 10px;
+  background-color: #f2eddc;
   /*overflow-y: auto; /* Agrega desplazamiento vertical si el contenido es demasiado largo */
 }
 
 .create-form-container {
   width: 100%;
-  height: 90%; 
+  height: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 20px;
   margin: 10px;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
 
 .create-form-container input[type="text"],
@@ -111,7 +111,7 @@ form input[type="submit"] {
 
 .task textarea.description {
   width: 100%; /* Usa el 100% del ancho de la tarjeta */
-  height: 100px; 
+  height: 100px;
   padding: 8px;
   margin-bottom: 15px; /* Agrega un borde para delimitar el textarea */
   border-radius: 4px;
@@ -123,21 +123,22 @@ form input[type="submit"] {
 }
 
 .task-buttons {
+  width: 5%;
   display: flex;
   justify-content: space-between;
   align-items: center; /* Centra verticalmente los elementos */
 }
 
-.task-buttons button {
-  padding: 5px 10px;
+.task-buttons img {
   border: none;
-  border-radius: 4px;
   cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background: none;
 }
 
 .buttonUpdate {
   background-color: #007bff;
-  color: #fff;
 }
 
 .task-buttons button.delete {
