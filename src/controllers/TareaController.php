@@ -1,7 +1,8 @@
 <?php
 
 include_once '../../models/crud.php';
-include_once './../../../private/conexion.php';
+include_once '../../utils/conexion.php';
+// include_once './../../../private/conexion.php';
 
 class TareaController {
     private $model;
