@@ -13,6 +13,7 @@ Este proyecto es una aplicación web de gestión de tareas (TODO) que incluye au
 ## Tecnologías utilizadas
 
 **Frontend:** 
+
     -HTML.
     
     -CSS.
@@ -20,6 +21,7 @@ Este proyecto es una aplicación web de gestión de tareas (TODO) que incluye au
     -JavaScript.
 
 **Backend:** 
+
     -Versión de PHP: 8.2.4.
     
     -Versión del servidor: 10.4.28-MariaDB - mariadb.org binary distribution.
