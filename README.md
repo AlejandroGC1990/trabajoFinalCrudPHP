@@ -34,20 +34,20 @@ En esta captura se puede ver que según el valor de importancia de la tarea, la 
 
 ## Instrucciones para descargar e instalar la Aplicación Web "TO DO TASK" en un entorno local:
 
+### Instalar y Configurar XAMPP:
+
+- Descarga e instala XAMPP desde [https://www.apachefriends.org/index.html](https://www.apachefriends.org/index.html) según las instrucciones proporcionadas para tu sistema operativo.
+- Inicia los servicios de Apache y MySQL en XAMPP.
+
 ### Clonar el Repositorio desde GitHub:
 
 - Abre tu terminal o línea de comandos.
-- Ejecuta el siguiente comando para clonar el repositorio en tu máquina:
+- Ejecuta el siguiente comando para clonar el repositorio en tu máquina, dentro de la carpeta Xampp/htdocs:
 
 ```bash
   git clone   hps://github.com/AlejandroGC1990/trabajoFinalCrudPHP.git
 
 ```
-
-### Instalar y Configurar XAMPP:
-
-- Descarga e instala XAMPP desde [https://www.apachefriends.org/index.html](https://www.apachefriends.org/index.html) según las instrucciones proporcionadas para tu sistema operativo.
-- Inicia los servicios de Apache y MySQL en XAMPP.
 
 ### Importar la Base de Datos:
 
@@ -59,7 +59,7 @@ En esta captura se puede ver que según el valor de importancia de la tarea, la 
 
 ### Configurar la Aplicación:
 
-- Crea un archivo ".env" en el primer nivel para la configuración de la base de datos en el repositorio clonado.
+- Crea un archivo ".env" en la raiz del proyecto para la configuración de la base de datos en el repositorio clonado.
 - Actualiza la configuración de la base de datos con tus credenciales.
 
 ```bash
