@@ -45,7 +45,7 @@ En esta captura se puede ver que según el valor de importancia de la tarea, la 
 - Ejecuta el siguiente comando para clonar el repositorio en tu máquina, dentro de la carpeta Xampp/htdocs:
 
 ```bash
-  git clone   hps://github.com/AlejandroGC1990/trabajoFinalCrudPHP.git
+  git clone https://github.com/AlejandroGC1990/trabajoFinalCrudPHP.git
 
 ```
 
