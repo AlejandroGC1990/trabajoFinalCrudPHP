@@ -14,13 +14,18 @@ Este proyecto es una aplicación web de gestión de tareas (TODO) que incluye au
 
 **Frontend:** 
     -HTML.
+    
     -CSS.
+    
     -JavaScript.
 
 **Backend:** 
     -Versión de PHP: 8.2.4.
+    
     -Versión del servidor: 10.4.28-MariaDB - mariadb.org binary distribution.
+    
     -Versión del protocolo: 10.
+    
     -Versión del cliente de base de datos: libmysql - mysqlnd 8.2.4
     
 ## Características
